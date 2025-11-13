@@ -145,7 +145,7 @@ pipeline {
                     body: body,
                     to: 'arorayush1100@gmail.com',
                     from: 'arorayush1100@gmail.com',
-                    replyTo: 'aakanshigarg62@gmail.com',
+                    replyTo: 'arorayush1100@gmail.com',
                     mimeType: 'text/html',
                     attachmentsPattern: 'trivy-image-report.html'
                 )

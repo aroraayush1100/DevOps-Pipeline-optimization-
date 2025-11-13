@@ -24,7 +24,7 @@ pipeline {
 
         stage('Git Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'git-cred', url: 'https://github.com/Aakanshi-garg/BoardGame.git'
+                git branch: 'main', credentialsId: 'git-cred', url: 'https://github.com/aroraayush1100/DevOps-Pipeline-optimization-.git'
             }
         }
 
@@ -51,7 +51,7 @@ pipeline {
                 withSonarQubeEnv('sonar') {
                     sh '''
                         ${SCANNER_HOME}/bin/sonar-scanner \
-                        -Dsonar.projectName=BoardGame \
+                        -Dsonar.projectName=DevOps-Pipeline-optimization- \
                         -Dsonar.projectKey=BoardGame \
                         -Dsonar.java.binaries=.
                     '''
@@ -77,8 +77,8 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh 'docker build -t aakanshigarg/boardgame:latest .'
-                        sh 'docker push aakanshigarg/boardgame:latest'
+                        sh 'docker build -t ayusharora/boardgame:latest .'
+                        sh 'docker push ayusharora/boardgame:latest'
                     }
                 }
             }
@@ -86,7 +86,7 @@ pipeline {
 
         stage('Docker Image Scan') {
             steps {
-                sh 'trivy image --timeout 5m --format table -o trivy-image-report.html aakanshigarg/boardgame:latest'
+                sh 'trivy image --timeout 5m --format table -o trivy-image-report.html ayusharora/boardgame:latest'
             }
         }
 
@@ -143,8 +143,8 @@ pipeline {
                 emailext (
                     subject: "${jobName} - Build #${buildNumber} - ${pipelineStatus.toUpperCase()}",
                     body: body,
-                    to: 'aakanshigarg62@gmail.com',
-                    from: 'aakanshigarg62@gmail.com',
+                    to: 'arorayush1100@gmail.com',
+                    from: 'arorayush1100@gmail.com',
                     replyTo: 'aakanshigarg62@gmail.com',
                     mimeType: 'text/html',
                     attachmentsPattern: 'trivy-image-report.html'
